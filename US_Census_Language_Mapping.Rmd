@@ -31,7 +31,7 @@ library(knitr)
 library(leaflet)
 
 # Set directory 
-setwd("~/")
+# setwd("~/")
 
 
 # For if-else fork for API key
@@ -55,10 +55,10 @@ This script illustrates one method of accessing US Census data using [R](https:/
 
 ### Goals of the demo
 
-1. Provide a high-level overview of key functions in [tidycensus](), an R package that collects data from servers at the US Census; 
+1. Provide a high-level overview of key functions in [tidycensus](https://walker-data.com/tidycensus/), an R package that collects data from servers at the US Census; 
 1. Show how labels in the data can be filtered and modified for later scripting;
 1. Work through design choices in how the data are presented visually; 
-1. Provided an advanced, worked example of an interactive [tmap]() in an embedded [shiny app](). 
+1. Provided an advanced, worked example of an interactive [tmap](https://github.com/mtennekes/tmap) in an embedded [shiny app](https://shiny.rstudio.com/). 
 
 Don't worry if not all of these terms are familiar yet; they should become clearer by reading the description of the script below. Just a warning: running the script in R or R Studio can take a very long time!
 
@@ -107,7 +107,7 @@ Again, this is a lot of information! If you're new to R, APIs, or even programmi
 
 ```{r, api_key_validation, echo = FALSE}
 
-# If no API key is provided, code chunks without the 
+# If no API key is provided
 
 if (api_key == "NULL") {
   api_nokey_value = TRUE
@@ -139,9 +139,19 @@ We'll be using the American Community Survey (acs5) from 2012 for illustration. 
 ```{r, echo = FALSE, include = FALSE, eval = api_nokey_value}
 # Use if no API key provided
 
+setwd('/Users/jesse/Box/DataScience/MapProjectGit/')
+
 # Create list of variables for 2012
-df_lang12 <-  
-  st_read(dsn = "www/df_lang12_data.shp")
+df_lang12 <-
+  readRDS("Data/df_lang12_percent")
+  
+  
+# st_read(dsn = "www/df_lang12_data.shp")
+
+# st_write(df_lang12, "Data/df_lang12_data.shp", package = "sf")
+
+# Note: Code chunks with "eval = api_nokey_value" will not be run if no API key is provided.
+
 
 # st_write(df_lang12, "Data/df_lang12_data.shp", package = "sf")
 
